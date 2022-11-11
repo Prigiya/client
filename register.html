@@ -14,7 +14,7 @@
       <div class="logo">
         <img src="/css/images/logo.png" width="80" height="80"/>
     </div>
-    <!-- Discussion Forum -->
+   
     <div class="headingtext">
       <span><a>D</a>iscussion <a>F</a>orum</span>
     </div>
@@ -23,7 +23,6 @@
     <form onsubmit="register(event)">
         <div class="field role">
           <div class="input-area">
-            <!-- <label for="role">Choose Role:</label> -->
             <select name="role" id="role">
               <option disabled selected value="0"> -- select role -- </option>
               <option value="1" >Admin</option>
@@ -57,19 +56,15 @@
         <div class="error error-txt">Password can't be blank</div>
       </div>
       <p id="messageText"></p>
-      <!-- <div class="pass-txt"><a href="#">Forgot password?</a></div> -->
       <input type="submit" value="Register" id="btnlogin"/>
-      <!-- <button role="button" type="submit">Save</button> -->
-      <!-- <input type="submit" value="register"> -->
     </form>
     <div class="sign-txt">For Existing User? <a href="/">Login</a></div>
   </div>
 
-  <!-- <script src="/js/scriptreg.js"></script> -->
+
 
 <script>
   function register(e){
-      // alert('ydgd dgwd');
       e.preventDefault();
       
           let roledata= document.getElementsByName('role');
@@ -84,8 +79,6 @@
           data.append('name', namedata[0].value);
           data.append('email', emaildata[0].value);
           data.append('password', passdata[0].value);
-          // data.append("commentpost", "abc deffghtyhyrhhrhrg wefewfwefw sdkdj");
-          // data.append("like_dislike", "dislike");
 
           var xhr = new XMLHttpRequest();
           xhr.withCredentials = true;
@@ -95,7 +88,6 @@
               console.log(this.responseText);
               document.getElementById('messageText').innerHTML = "User Registered Successfully";
               window.location.reload();
-              //console.log()
           }
           else{
             document.getElementById('messageText').innerHTML = "User is not Registered, Try Again";
@@ -103,7 +95,6 @@
           });
 
           xhr.open("POST", "http://acs.vhost:8000/api/register");
-          // xhr.setRequestHeader("Authorization", "Bearer" + token.access_token);
 
           xhr.send(data);
 }

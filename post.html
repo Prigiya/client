@@ -8,7 +8,6 @@
         <link rel="icon" href="/css/images/logo.png" type="image/png">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <!-- <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital@1&display=swap" rel="stylesheet"> -->
     </head>
     
     <body>
@@ -173,12 +172,6 @@
 
         window.onload = onPageLoad();
       function onPageLoad(){
-
-        // localStorage.setItem('logintoken',
-        //         JSON.stringify(
-        //             'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYWNzLnZob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjY3NDc5ODM4LCJleHAiOjE2Njc0ODM0MzgsIm5iZiI6MTY2NzQ3OTgzOCwianRpIjoiRFFHQ1NRSEt5N0JLdEo0eCIsInN1YiI6IjciLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.4GGDsYDAIs4ZZUj8bM3zf6Wk1-2fThtbG64HPEqaEEg'
-        //             )
-        //     );
         let username = JSON.parse(localStorage.getItem('username'));
         document.getElementById("username").innerHTML = username;
 
@@ -187,17 +180,12 @@
         xhr.open("GET", "http://acs.vhost:8000/api/post/"+contentid);
         xhr.withCredentials = true;
         xhr.responseType = 'json';
-        // xhr.setRequestHeader("Authorization",'Bearer ' + token); 
         xhr.setRequestHeader('Authorization', 'Bearer ' + token.access_token);
         //console.log(xhr);
         document.getElementById("postid").value= contentid
         document.getElementById("postid_reply").value= contentid
         document.getElementById("likeid").value= contentid
         document.getElementById("dislikeid").value= contentid
-        // document.getElementById("postid").innerHTML=contentid;
-        // console.log(contentid);
-
-        
 
         xhr.onload = () =>{
         if(xhr.status >= 400){
@@ -241,7 +229,6 @@
               var part1 = arr[i].email.indexOf(filterKey);
               if(part1 != -1)
               {                          
-                  // result[+i] = arr[i]; 
                   result.push(arr[i]);                        
               }
           }
@@ -254,7 +241,7 @@
           name = loginuser_data[0]["name"];
           roleid = loginuser_data[0]["role_id"];
           userid = loginuser_data[0]["id"];
-        //   console.log('useriddddddddd'+userid);
+
           document.getElementById("username").innerHTML = name ;
           document.getElementById("userid").value= userid;
           document.getElementById("userid_com").value= userid;
@@ -266,7 +253,6 @@
       };
       xhrdata.send();
      
-
 
       /*******************************************************Display Comment data*************************************/
       var xhrcmnt = new XMLHttpRequest();
@@ -284,7 +270,6 @@
           var jsonResultcmnt = JSON.parse(responsedatacmnt);
 
 
-        //   console.log(emailid);
           console.log(jsonResultcmnt);
         
           var len = Object.keys(jsonResultcmnt).length;
@@ -309,23 +294,6 @@
             }
             text += "</table>"    
             document.getElementById("tabletitle").innerHTML = text;
-
-            //////////////Code for modal//////////////
-            // var mpopup_reply = document.getElementById('mpopupBox_reply');
-            // var mpLink_reply = document.getElementById("mpopupLink_reply");
-            // var close = document.getElementsByClassName("close")[0];
-            // mpLink_reply.onclick = function() {
-            //     mpopup_reply.style.display = "block";
-            // };
-            // close.onclick = function() {
-            //     mpopup_reply.style.display = "none";
-            // };
-            // window.onclick = function(event) {
-            //     if (event.target == mpopup_reply) {
-            //         mpopup_reply.style.display = "none";
-            //     }
-            // };
-        //   document.getElementById("commentpostdata").innerHTML = JSON.stringify(jsonResultcmnt);
         }
       };
      
@@ -341,7 +309,6 @@
     </script>
     <script>
         function commentsub(e){
-            // alert('ydgd dgwd');
             e.preventDefault();
 
                 let commentdata= document.getElementsByName('commentpost');
@@ -361,7 +328,6 @@
                 if(this.readyState === 4) {
                     console.log(this.responseText);
                     window.location.reload();
-                    //console.log()
                 }
                 });
 
@@ -376,30 +342,18 @@
     <script>
 
 function likesub(e){
-            // var button = document.getElementById("likebtn");
-            // button.addEventListener("click", onClick);
-
-            // function onClick() {
-            // console.log("Clicked");
-            // button.disabled = true;
-            // }
-            // alert('ydgd dgwd');m
             e.preventDefault();
            
                 let token = JSON.parse(localStorage.getItem('logintoken'));
 
                 let likedataa= document.getElementsByName('likedata');
-                // let dislikedataa= document.getElementsByName('dislikedata');
                 let likeid= document.getElementsByName('likeid');
                 let userid_like= document.getElementsByName('userid_like');
 
                 var data = new FormData();
                 data.append('likedata', likedataa[0].value);
-                // data.append('dislikedata', dislikedataa[0].value);
                 data.append('likeid', likeid[0].value);
                 data.append('userid_like', userid_like[0].value);
-                // data.append("commentpost", "abc deffghtyhyrhhrhrg wefewfwefw sdkdj");
-                // data.append("like_dislike", "dislike");
 
                 var xhr = new XMLHttpRequest();
                 xhr.withCredentials = true;
@@ -407,7 +361,6 @@ function likesub(e){
                 xhr.addEventListener("readystatechange", function() {
                 if(this.readyState === 4) {
                     console.log(this.responseText);
-                    //console.log()
                 }
                 });
 
@@ -438,17 +391,14 @@ function likesub(e){
 <script>
 
       function dislikesub(e){
-            // alert('ydgd dgwd');
             e.preventDefault();
                 let token = JSON.parse(localStorage.getItem('logintoken'));
 
-                // let likedata_disa= document.getElementsByName('likedata_dis');
                 let dislikedata_disa= document.getElementsByName('dislikedata_dis');
                 let dislikeid= document.getElementsByName('dislikeid');
                 let userid_dislike= document.getElementsByName('userid_dislike');
 
                 var data = new FormData();
-                // data.append('likedata_dis', likedata_disa[0].value);
                 data.append('dislikedata_dis', dislikedata_disa[0].value);
                 data.append('dislikeid', dislikeid[0].value);
                 data.append('userid_dislike', userid_dislike[0].value);
@@ -459,7 +409,6 @@ function likesub(e){
                 xhr.addEventListener("readystatechange", function() {
                 if(this.readyState === 4) {
                     console.log(this.responseText);
-                    //console.log()
                 }
                 });
 
@@ -469,12 +418,6 @@ function likesub(e){
                 xhr.send(data);
       }
     </script>
-
-    <!-- <script>
-        function myFunction(x) {
-        x.classList.toggle("fa-thumbs-down");
-        }
-    </script> -->
 
     <!-------------------Modal Open----------------->
     <script>

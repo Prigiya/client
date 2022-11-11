@@ -8,7 +8,6 @@
     <link rel="icon" href="/css/images/logo.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital@1&display=swap" rel="stylesheet"> -->
 </head>
 
 <body>
@@ -16,14 +15,10 @@
       <div class="logo">
           <img src="/css/images/logo.png" width="80" height="80"/>
       </div>
-        <!--SearchBox Section-->
         <div class="search-box">
           <div class="headingtext">
             <span><a>D</a>iscussion <a>F</a>orum</span>
           </div>
-          <!-- <div class="feedback">
-            <button type="button" class="feedback-button"><i class="fa fa-plus"></i>&nbsp;Give Feedback</button>
-          </div> -->
             <div class="search-box-set">
               <i class="fa fa-search"></i>
               <input id="myInput" onkeyup="searchTable()" type="text" placeholder="search ...">
@@ -91,25 +86,15 @@
             <div class="table-row" id="tabletitle"> <div class="el"> </div></div>
             
         </div>
-            <!--ends here-->
       </div>
   </div>
-
-    <!-- <script src="main.js"></script> -->
     
     <script>
       window.onload = onPageLoad();
       function onPageLoad(){
 
-        // localStorage.setItem('logintoken',
-        //         JSON.stringify(
-        //             'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYWNzLnZob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjY3NDc0Mjc3LCJleHAiOjE2Njc0Nzc4NzcsIm5iZiI6MTY2NzQ3NDI3NywianRpIjoiSXNEbnpFVmREQVdTR0FLaCIsInN1YiI6IjciLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.PCMyGGHhGEro4XgMMZXCKCY2JwNOP1yok-tvDgElS5k'
-        //             )
-        //     );
-
         let token = JSON.parse(localStorage.getItem('logintoken'));
         let username = JSON.parse(localStorage.getItem('username'));
-        // document.getElementById("username").innerHTML = username;
         console.log(username);
         console.log(token);
 
@@ -127,7 +112,6 @@
           var responsedataa = JSON.stringify(xhrdata.response);
           var jsonResulta = JSON.parse(responsedataa);
 
-          ////json filter
           var arr = (jsonResulta);
           
           const filterKey = username;  
@@ -141,7 +125,6 @@
               var part1 = arr[i].email.indexOf(filterKey);
               if(part1 != -1)
               {                          
-                  // result[+i] = arr[i]; 
                   result.push(arr[i]);                        
               }
           }
@@ -154,13 +137,11 @@
           name = loginuser_data[0]["name"];
           roleid = loginuser_data[0]["role_id"];
           id = loginuser_data[0]["id"];
-          // console.log("roleeeeee"+roleid);
           var roleid = localStorage.setItem('roleid', JSON.stringify(roleid));
           var user_id = localStorage.setItem('userid', JSON.stringify(id));
           
           document.getElementById("username").innerHTML = name ;
           document.getElementById("userid").value = userid ;
-          // console.log(jsonResulta);
         }
       };
       xhrdata.send();
@@ -178,7 +159,6 @@
         console.log(xhr);
         xhr.onload = () =>{
                 if(xhr.status >= 400){
-            //reject(xhr.response);
             console.log('failed');
             console.log(JSON.stringify(xhr.response));
         }
@@ -186,8 +166,6 @@
           
           var responsedata = JSON.stringify(xhr.response);
           
-          // alert(responsedata.length);
-       
           var jsonResult = JSON.parse(responsedata);
           console.log(jsonResult);
           
@@ -195,7 +173,6 @@
           
           var obj1 = " ";
           var obj2 = " ";
-          // var table = document.getElementById('myTable');
           let text = "<table border='1' class='tabledata' id='myTable'>"
           for (i=0; i<len; i++){
 
@@ -208,19 +185,15 @@
             const dateArray = myArray[0];
             date2 = dateArray.split("-").reverse().join("-");
 
-            text += "<tr><td class='count widthsno'></td><td><div class='subjects'> "+"<span class='titledata'>"+"<a class='el' href='"+ 'post.html?id='+ jsonResult[i]["id"] +"' id='title'>" +jsonResult[i]["title"] + "</a></span><br><span><a href='#' id='body'>"+ jsonResult[i]["body"] +"</a></span><br><span class='fright txt12'><b>Posted on : </b>"+ date2 +"</span></div></td><td><div class='activity'><i class='fa fa-thumbs-up yellow cmnt-count'><span>" + jsonResult[i]["likeCount"] + "</span></i> <i class='fa fa-thumbs-down blue cmnt-count'><span>" + jsonResult[i]["dislikeCount"] + "</span></i><i class='fa fa-comment red cmnt-count'><span>" + jsonResult[i]["commentCount"] + "</span></i> </div></td></tr>";
-          //  obj1 = jsonResult[i]["id"];
-                
+            text += "<tr><td class='count widthsno'></td><td><div class='subjects'> "+"<span class='titledata'>"+"<a class='el' href='"+ 'post.html?id='+ jsonResult[i]["id"] +"' id='title'>" +jsonResult[i]["title"] + "</a></span><br><span><a href='#' id='body'>"+ jsonResult[i]["body"] +"</a></span><br><span class='fright txt12'><b>Posted on : </b>"+ date2 +"</span></div></td><td><div class='activity'><i class='fa fa-thumbs-up yellow cmnt-count'><span>" + jsonResult[i]["likeCount"] + "</span></i> <i class='fa fa-thumbs-down blue cmnt-count'><span>" + jsonResult[i]["dislikeCount"] + "</span></i><i class='fa fa-comment red cmnt-count'><span>" + jsonResult[i]["commentCount"] + "</span></i> </div></td></tr>";  
           }
           text += "</table>"   
-         document.getElementById("tabletitle").innerHTML = text;          
-        //  console.log(xhr.response);
+         document.getElementById("tabletitle").innerHTML = text;    
         }
       };
       xhr.send();
         } 
   else if(roleid_val == 2){
-    // alert(userid);
     var xhrrole = new XMLHttpRequest();
     xhrrole.open("GET", "http://acs.vhost:8000/api/userpost/"+userid);
     xhrrole.withCredentials = true;
@@ -242,7 +215,6 @@
           
           var obj1 = " ";
           var obj2 = " ";
-          // var table = document.getElementById('myTable');
           let text = "<table border='1' class='tabledata' id='myTable'>"
           for (i=0; i<len; i++){
 
@@ -260,17 +232,12 @@
           }
           text += "</table>"   
          document.getElementById("tabletitle").innerHTML = text;
-            // console.log(xhrrole.response);
         }
       };
       xhrrole.send();
   }else{
 
   }   
-        
-      // xhr.send();
-     
-      //  document.getElementById("demo").innerHTML = xhr.response;
       }
 
   
@@ -286,7 +253,6 @@
 
 <script>
   function newpostsub(e){
-      // alert('ydgd dgwd');
       e.preventDefault();
 
           let title= document.getElementsByName('title');
@@ -326,26 +292,15 @@
 
  <!-------------------Modal Open----------------->
  <script>
-  // Select modal
   var mpopup = document.getElementById('mpopupBox');
-  
-  // Select trigger link
   var mpLink = document.getElementById("mpopupLink");
-  
-  // Select close action element
   var close = document.getElementsByClassName("close")[0];
-  
-  // Open modal once the link is clicked
   mpLink.onclick = function() {
       mpopup.style.display = "block";
   };
-  
-  // Close modal once close element is clicked
   close.onclick = function() {
       mpopup.style.display = "none";
   };
-  
-  // Close modal when user clicks outside of the modal box
   window.onclick = function(event) {
       if (event.target == mpopup) {
           mpopup.style.display = "none";

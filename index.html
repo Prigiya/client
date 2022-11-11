@@ -13,7 +13,6 @@
     <header> <div class="logo">
       <img src="/css/images/logo.png" width="80" height="80"/>
   </div>
-  <!-- Discussion Forum -->
   <div class="headingtext">
     <span><a>D</a>iscussion <a>F</a>orum</span>
   </div>
@@ -37,7 +36,6 @@
         </div>
         <div class="error error-txt">Password can't be blank</div>
       </div>
-      <!-- <div class="pass-txt"><a href="#">Forgot password?</a></div> -->
       <input type="submit" value="Login" id="btnlogin"/>
     </form>
     <div class="sign-txt"> New User? <a href="register.html">Register Now</a></div>
@@ -53,23 +51,19 @@
 
                 var username = document.getElementById("email").value;
                 
-                //console.log(emaildata[0].value)
                 var form_data = new FormData();
                 form_data.append('email', emaildata[0].value);
                 form_data.append('password',passdata[0].value);
 
-                // var usernamedata = form_data.append('email', emaildata[0].value);
                 const xhr = new XMLHttpRequest();
 
                 xhr.open('POST', "http://acs.vhost:8000/api/login");
                 xhr.withCredentials = true;
                 xhr.send(form_data);
                     
-               // xhr.setRequestHeader('Access-Control-Allow-Origin', '*')
                 xhr.addEventListener("readystatechange", function() {
                 if(xhr.status==200 && xhr.readyState === 4) {
-                    //console.log(this.responseText);
-                    //window.location.assign('home.html');
+                   
                     var result = JSON.parse(this.response);
                     
                     var emaildata = localStorage.setItem('username', JSON.stringify(username));
@@ -91,15 +85,10 @@
                     }
                     else{
                       console.log(result);
-                     // window.location.assign('index.html');
+                     
                     }
                 });
-
-                
-
-               // xhr.send(form_data);
             }
   </script>
-<!-- <script src="/js/script.js"></script> -->
 </body>
 </html>

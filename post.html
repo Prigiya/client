@@ -301,7 +301,61 @@
 
       
       /*********************************************************End Comment Data ***************************************/
+      /*********************************************************Start LikeDislike Data ***************************************/
+var xhrlike = new XMLHttpRequest();
+xhrlike.open("GET", "http://acs.vhost:8000/api/likedata/"+contentid);
+xhrlike.withCredentials = true;
+xhrlike.responseType = 'json';
+xhrlike.setRequestHeader('Authorization', 'Bearer ' + token.access_token);
+xhrlike.onload = () =>{
+        if(xhrlike.status >= 400){
+            console.log('failed');
+            console.log(JSON.stringify(xhrlike.response));
+        }
+        else{
+          var responsedatalike = JSON.stringify(xhrlike.response);
+          var jsonResultlike = JSON.parse(responsedatalike);
+
+          var likedata = jsonResultlike[0]["likedata"]
+
+          var button1 = document.getElementById("likebtn");
+          if (likedata == 1){
+            button1.disabled = true;
+          }
+
+        //   console.log("Likeeeeeeeee"+likedata);
+        }
+      };
      
+      xhrlike.send();
+
+      var xhrdislike = new XMLHttpRequest();
+      xhrdislike.open("GET", "http://acs.vhost:8000/api/dislikedata/"+contentid);
+      xhrdislike.withCredentials = true;
+      xhrdislike.responseType = 'json';
+      xhrdislike.setRequestHeader('Authorization', 'Bearer ' + token.access_token);
+      xhrdislike.onload = () =>{
+        if(xhrdislike.status >= 400){
+            console.log('failed');
+            console.log(JSON.stringify(xhrdislike.response));
+        }
+        else{
+          var responsedatadislike = JSON.stringify(xhrdislike.response);
+          var jsonResultdislike = JSON.parse(responsedatadislike);
+
+          var dislikedata = jsonResultdislike[0]["dislikedata"]
+
+          var button2 = document.getElementById("dislikebtn");
+          if (dislikedata == 1){
+            button2.disabled = true;
+          }
+
+        //   console.log("Likeeeeeeeee"+likedata);
+        }
+      };
+     
+      xhrdislike.send();
+      /*********************************************************End Like-Dislike Data ***************************************/
 
     }
 

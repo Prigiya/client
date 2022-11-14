@@ -298,8 +298,12 @@
       };
      
       xhrcmnt.send();
-    }
+
+      
       /*********************************************************End Comment Data ***************************************/
+     
+
+    }
 
       function logout(){
             localStorage.clear();
@@ -361,6 +365,7 @@ function likesub(e){
                 xhr.addEventListener("readystatechange", function() {
                 if(this.readyState === 4) {
                     console.log(this.responseText);
+                    window.location.reload();
                 }
                 });
 
@@ -409,6 +414,7 @@ function likesub(e){
                 xhr.addEventListener("readystatechange", function() {
                 if(this.readyState === 4) {
                     console.log(this.responseText);
+                    window.location.reload();
                 }
                 });
 
